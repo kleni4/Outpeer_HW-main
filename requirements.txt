@@ -1,0 +1,8 @@
+Django==5.0.2  
+django-crispy-forms==2.1  #  рендеринг форм Django
+crispy-bootstrap5==2024.2  # Интеграция crispy-forms с Bootstrap 5
+openpyxl==3.1.2  #  Excel 
+python-dotenv==1.0.1 
+asgiref==3.8.1  
+sqlparse==0.5.3  
+et_xmlfile==2.0.0  #(нужна для openpyxl)
