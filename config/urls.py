@@ -26,4 +26,5 @@ urlpatterns = [
         next_page='user_list'  # Перенаправление после успешного входа
     ), name='home'),
     path('users/', include('users.urls')),
+    path('courses/', include('courses.urls')),
 ]

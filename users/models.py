@@ -10,6 +10,7 @@ import random
 class User(AbstractUser):
     class Role(models.TextChoices):
         STUDENT = 'student', 'Студент'
+        TEACHER = 'teacher', 'Преподаватель'
         MANAGER = 'manager', 'Менеджер'
         ADMINISTRATOR = 'administrator', 'Администратор'
 
