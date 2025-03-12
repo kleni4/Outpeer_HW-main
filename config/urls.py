@@ -27,4 +27,5 @@ urlpatterns = [
     ), name='home'),
     path('users/', include('users.urls')),
     path('courses/', include('courses.urls')),
+    path('lessons/', include('lessons.urls')),
 ]

@@ -1,0 +1,85 @@
+{% extends 'users/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'course_list' %}">Курсы</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'lessons:course-lessons-view' lesson.course.id %}">{{ lesson.course.title }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ lesson.title }}</li>
+        </ol>
+    </nav>
+
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">{{ lesson.title }}</h3>
+            <span class="badge bg-info">{{ lesson.get_lesson_type_display }}</span>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h5>Основная информация</h5>
+                    <p><strong>Описание:</strong> {{ lesson.description }}</p>
+                    <p><strong>Продолжительность:</strong> {{ lesson.duration }} минут</p>
+                    <p><strong>Порядковый номер:</strong> {{ lesson.order }}</p>
+                    <p><strong>Обязательный урок:</strong> 
+                        {% if lesson.is_required %}
+                            <span class="badge bg-primary">Да</span>
+                        {% else %}
+                            <span class="badge bg-secondary">Нет</span>
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <h5>Дополнительные материалы</h5>
+                    {% if lesson.video_url %}
+                        <p><strong>Видео:</strong> <a href="{{ lesson.video_url }}" target="_blank">Смотреть</a></p>
+                    {% endif %}
+                    {% if lesson.presentation_url %}
+                        <p><strong>Презентация:</strong> <a href="{{ lesson.presentation_url }}" target="_blank">Открыть</a></p>
+                    {% endif %}
+                    {% if lesson.additional_materials %}
+                        <p><strong>Дополнительные материалы:</strong></p>
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                {{ lesson.additional_materials|linebreaks }}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <h5>Содержание урока</h5>
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            {{ lesson.content|linebreaks }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if lesson.homework %}
+            <div class="row mt-4">
+                <div class="col-12">
+                    <h5>Домашнее задание</h5>
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            {{ lesson.homework|linebreaks }}
+                            {% if lesson.homework_deadline %}
+                                <p class="mt-2 text-danger">
+                                    <strong>Срок сдачи:</strong> {{ lesson.homework_deadline|date:"d.m.Y H:i" }}
+                                </p>
+                            {% endif %}
+                            <p><strong>Максимальный балл:</strong> {{ lesson.max_score }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -20,6 +20,7 @@
                 <select name="role" class="form-select">
                     <option value="">Все роли</option>
                     <option value="student" {% if current_role == 'student' %}selected{% endif %}>Студент</option>
+                    <option value="teacher" {% if current_role == 'teacher' %}selected{% endif %}>Преподаватель</option>
                     <option value="manager" {% if current_role == 'manager' %}selected{% endif %}>Менеджер</option>
                     <option value="administrator" {% if current_role == 'administrator' %}selected{% endif %}>Администратор</option>
                 </select>
@@ -71,7 +72,8 @@
                         <span class="badge rounded-pill 
                             {% if user.role == 'administrator' %}bg-danger{% endif %}
                             {% if user.role == 'manager' %}bg-primary{% endif %}
-                            {% if user.role == 'student' %}bg-info{% endif %}">
+                            {% if user.role == 'student' %}bg-info{% endif %}
+                            {% if user.role == 'teacher' %}bg-success{% endif %}">
                             {{ user.get_role_display }}
                         </span>
                     </td>

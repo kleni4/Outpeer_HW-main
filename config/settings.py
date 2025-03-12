@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'rest_framework',
     'courses.apps.CoursesConfig',
+    'lessons.apps.LessonsConfig',
 ]
 
 AUTH_USER_MODEL = "users.User"
@@ -66,7 +67,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -99,9 +100,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'op_hw',
+        'NAME': 'basename',
         'USER': 'user',
-        'PASSWORD': 'u_pass',
+        'PASSWORD': 'pass',
         'HOST': 'localhost',
         'PORT': 5432,
     }

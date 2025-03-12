@@ -35,9 +35,14 @@
                                 {% endif %}
                             </td>
                             <td>
-                                <a href="{% url 'course_detail' course.id %}" class="btn btn-primary btn-sm">
-                                    Просмотр студентов
-                                </a>
+                                <div class="btn-group">
+                                    <a href="{% url 'course_detail' course.id %}" class="btn btn-primary btn-sm">
+                                        Просмотр студентов
+                                    </a>
+                                    <a href="{% url 'lessons:course-lessons-view' course.id %}" class="btn btn-info btn-sm">
+                                        Уроки курса
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                         {% empty %}
