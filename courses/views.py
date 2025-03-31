@@ -7,6 +7,7 @@ from .models import Course
 from .serializers import CourseSerializer, CourseCreateUpdateSerializer
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from .permissions import IsManager
 
 User = get_user_model()
 
@@ -22,7 +23,7 @@ def course_detail(request, course_id):
 
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated, IsManager]
 
     def get_serializer_class(self):
         if self.action in ['create', 'update', 'partial_update']:

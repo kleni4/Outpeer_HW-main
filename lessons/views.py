@@ -9,14 +9,14 @@ from courses.models import Course
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from courses.serializers import CourseSerializer
-from rest_framework.permissions import AllowAny
+from .permissions import IsManagerOrReadOnly
 
 User = get_user_model()
 
 class LessonViewSet(viewsets.ModelViewSet):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [permissions.IsAuthenticated, IsManagerOrReadOnly]
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -163,7 +163,7 @@ class LessonViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([permissions.AllowAny])
 def course_list(request):
     """
     Получение списка всех курсов
@@ -173,7 +173,7 @@ def course_list(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([permissions.AllowAny])
 def course_lessons(request, course_id):
     """
     Получение списка всех уроков определенного курса
@@ -184,7 +184,7 @@ def course_lessons(request, course_id):
     return Response(serializer.data)
 
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([permissions.AllowAny])
 def lesson_detail(request, lesson_id):
     """
     Получение информации об определенном уроке
@@ -194,7 +194,7 @@ def lesson_detail(request, lesson_id):
     return Response(serializer.data)
 
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([permissions.AllowAny])
 def lesson_create(request):
     """
     Создание нового урока
@@ -206,7 +206,7 @@ def lesson_create(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['PUT', 'PATCH'])
-@permission_classes([AllowAny])
+@permission_classes([permissions.AllowAny])
 def lesson_update(request, lesson_id):
     """
     Обновление существующего урока
@@ -224,7 +224,7 @@ def lesson_update(request, lesson_id):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['DELETE'])
-@permission_classes([AllowAny])
+@permission_classes([permissions.AllowAny])
 def lesson_delete(request, lesson_id):
     """
     Удаление урока
